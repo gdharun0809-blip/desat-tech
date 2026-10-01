@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login | DESAT INFOTECH</title>
+  <style>
+    :root {
+      --navy: #06152f;
+      --blue: #0b75f7;
+      --cyan: #42bfff;
+      --white: #ffffff;
+      --muted: #64748b;
+      --border: rgba(8, 119, 255, 0.12);
+      --bg: #f5f9ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffffff 0%, #f4f9ff 35%, #edf5ff 100%);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(10px);
+      animation: float 10s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    body::before {
+      background: rgba(66, 191, 255, 0.18);
+      top: -110px;
+      right: -70px;
+    }
+
+    body::after {
+      background: rgba(11, 117, 247, 0.12);
+      bottom: -120px;
+      left: -60px;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(22px) scale(1.06); }
+      100% { transform: translateY(-18px) scale(0.98); }
+    }
+
+    .login-shell {
+      position: relative;
+      z-index: 1;
+      width: min(420px, 92vw);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(6, 21, 47, 0.08);
+      padding: 32px 28px;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      color: var(--navy);
+      font-weight: 800;
+      letter-spacing: 1.5px;
+    }
+
+    .brand-mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: inline-block;
+      background: linear-gradient(135deg, #06152f, #0d59c3);
+      position: relative;
+      box-shadow: 0 12px 30px rgba(8, 119, 255, 0.18);
+    }
+
+    .brand-mark::before {
+      content: "D";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      right: 9px;
+      bottom: 8px;
+      width: 9px;
+      height: 9px;
+      background: #27c6ff;
+      box-shadow: -11px 0 0 #27c6ff, -22px -11px 0 #27c6ff, -11px -11px 0 #27c6ff;
+      border-radius: 2px;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 30px;
+      margin: 8px 0 10px;
+      color: var(--navy);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 26px;
+      font-size: 14px;
+    }
+
+    form {
+      display: grid;
+      gap: 18px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      background: #f8fbff;
+      font-size: 15px;
+      outline: none;
+      transition: border 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus {
+      border-color: rgba(11, 117, 247, 0.5);
+      box-shadow: 0 0 0 4px rgba(11, 117, 247, 0.08);
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--muted);
+      gap: 12px;
+    }
+
+    .remember {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .remember input {
+      width: auto;
+      margin: 0;
+    }
+
+    .link {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-btn {
+      border: none;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: #fff;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(11, 117, 247, 0.2);
+      transition: transform 0.2s ease;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 18px;
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-shell">
+    <div class="brand">
+      <span class="brand-mark" aria-label="DESAT logo"></span>
+      <span>DESAT</span>
+    </div>
+    <h1 class="title">Admin Login</h1>
+    <p class="subtitle">Secure access to internal dashboard</p>
+
+    <form onsubmit="event.preventDefault(); window.location.href='Desat info tech.html';">
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input id="email" type="email" placeholder="admin@desat.in" required>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Enter your password" required>
+      </div>
+
+      <div class="row">
+        <label class="remember"><input type="checkbox" /> Remember me</label>
+        <a class="link" href="#">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+
+    <a class="back" href="Desat info tech.html">← Back to Home</a>
+  </div>
+</body>
+</html>

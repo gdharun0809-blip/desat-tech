@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DESAT INFOTECH | ERP & Production Solutions</title>
+  <meta name="description" content="ERP and production software, custom business software, automation, web and mobile apps, and AI solutions for growing businesses." />
+  <style>
+    :root {
+      --navy: #06152f;
+      --blue: #0b75f7;
+      --cyan: #4ec7ff;
+      --light-bg: #f4f8ff;
+      --white: #ffffff;
+      --text: #12213e;
+      --muted: #5d6f87;
+      --line: #dfeaf8;
+      --shadow-soft: 0 12px 30px rgba(12, 35, 72, 0.07);
+      --shadow: 0 18px 45px rgba(6, 21, 47, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #ffffff;
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 440px;
+      height: 440px;
+      border-radius: 50%;
+      filter: blur(18px);
+      z-index: -1;
+      opacity: 0.8;
+      animation: floatGlow 12s ease-in-out infinite alternate;
+    }
+    body::before {
+      background: rgba(78, 199, 255, 0.18);
+      top: -120px; right: -120px;
+    }
+    body::after {
+      background: rgba(11, 117, 247, 0.12);
+      left: -120px; bottom: -120px;
+      animation-delay: 2s;
+    }
+    @keyframes floatGlow {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(24px) scale(1.06); }
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { width: min(1180px, 92%); margin: 0 auto; }
+    .section { padding: 100px 0; }
+    .section-tag {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--blue);
+    }
+    .section-title {
+      max-width: 760px;
+      font-size: clamp(2rem, 3vw, 3.1rem);
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+      margin: 16px 0 18px;
+      color: var(--navy);
+    }
+    .section-copy {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.8;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: all 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(6, 21, 47, 0.93);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(16px);
+    }
+    .nav { display: flex; justify-content: space-between; align-items: center; min-height: 80px; }
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+    }
+    .brand-mark {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: linear-gradient(135deg, #071a36, #0b75f7);
+      display: inline-block; position: relative; box-shadow: 0 12px 30px rgba(11,117,247,.22);
+    }
+    .brand-mark::before {
+      content: "D";
+      position: absolute; inset: 0;
+      display: grid; place-items: center;
+      color: #fff; font-weight: 900; font-size: 25px;
+      transform: translateY(-1px);
+    }
+    .brand-mark::after {
+      content: "";
+      position: absolute; right: 8px; bottom: 8px;
+      width: 8px; height: 8px; border-radius: 2px;
+      background: var(--cyan);
+      box-shadow: -10px 0 0 var(--cyan), -20px -10px 0 var(--cyan), -10px -10px 0 var(--cyan);
+    }
+    .brand small {
+      display: block; margin-top: 3px;
+      font-size: 9px; letter-spacing: 4px; color: #9ec9ff;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links a {
+      color: #dfeeff;
+      font-size: 14px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-btn {
+      padding: 11px 18px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 12px 25px rgba(11,117,247,.2);
+    }
+    .menu-btn { display: none; color: #fff; font-size: 30px; cursor: pointer; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      background:
+        radial-gradient(circle at 82% 24%, rgba(78,199,255,.28), transparent 24%),
+        radial-gradient(circle at 14% 18%, rgba(11,117,247,.18), transparent 22%),
+        linear-gradient(120deg, #07182d 0%, #0a1d3d 40%, #0d2d5f 100%);
+      min-height: 680px;
+      display: flex;
+      align-items: center;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 52px 52px;
+      opacity: 0.18;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 640px; height: 640px;
+      right: -160px; top: 90px;
+      border-radius: 50%;
+      border: 1px solid rgba(78,199,255,.22);
+      box-shadow: 0 0 0 82px rgba(78,199,255,.03), 0 0 0 155px rgba(78,199,255,.02);
+      animation: heroPulse 12s ease-in-out infinite alternate;
+    }
+    @keyframes heroPulse {
+      0% { transform: scale(0.98) translateX(0); }
+      100% { transform: scale(1.07) translateX(-12px); }
+    }
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 44px;
+      align-items: center;
+      min-height: 680px;
+      padding: 88px 0 64px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      padding: 9px 15px;
+      color: #d7ebff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .eyebrow .dot {
+      width: 9px; height: 9px; display: inline-block; border-radius: 50%;
+      background: var(--cyan); box-shadow: 0 0 18px var(--cyan);
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 5vw, 5.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      margin-bottom: 18px;
+      color: #fff;
+      max-width: 700px;
+    }
+    .hero h1 .gradient {
+      background: linear-gradient(90deg, #ffffff, #afebff, #6ec8ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-copy {
+      max-width: 660px;
+      font-size: 1.12rem;
+      color: #d3e6ff;
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      margin-top: 28px;
+    }
+    .primary-btn, .secondary-btn, .ghost-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 14px; font-weight: 700; padding: 16px 22px;
+      transition: .2s ease;
+      letter-spacing: 0.01em;
+    }
+    .primary-btn {
+      background: linear-gradient(135deg, #0b75f7, #40c7ff);
+      color: #fff; box-shadow: 0 16px 30px rgba(52,140,255,.25);
+    }
+    .secondary-btn {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.16);
+      color: #fff;
+    }
+    .ghost-btn {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      color: #dff7ff;
+    }
+    .primary-btn:hover, .secondary-btn:hover, .ghost-btn:hover { transform: translateY(-2px); }
+    .stats { display: flex; flex-wrap: wrap; gap: 32px; margin-top: 38px; }
+    .stat strong { display: block; font-size: 1.9rem; color: #fff; }
+    .stat span {
+      display: block; margin-top: 6px;
+      color: #a9c8ed; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    }
+
+    .hero-card-wrap { position: relative; display: flex; justify-content: center; align-items: center; }
+    .hero-card {
+      width: min(100%, 420px);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 28px;
+      padding: 22px 20px 18px;
+      box-shadow: 0 28px 60px rgba(0,0,0,.18);
+      backdrop-filter: blur(9px);
+    }
+    .hero-card .top-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 12px; border-radius: 999px;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      color: #dff5ff; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .hero-card h3 { font-size: 1.95rem; margin: 18px 0 16px; color: #fff; }
+    .metric-grid { display: grid; grid-template-columns: repeat(2, minmax(120px, 1fr)); gap: 14px; }
+    .metric { padding: 16px 14px; border-radius: 16px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); }
+    .metric small { display: block; color: #a9d7ff; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
+    .metric strong { display: block; margin-top: 10px; font-size: 1.55rem; color: #fff; }
+    .bars { display: flex; align-items: flex-end; gap: 12px; height: 110px; margin-top: 22px; }
+    .bars span { flex: 1; display: block; border-radius: 12px 12px 0 0; background: linear-gradient(180deg, var(--cyan), var(--blue)); animation: rise 2.8s ease-in-out infinite alternate; }
+    .bars span:nth-child(1){ height: 42%; }
+    .bars span:nth-child(2){ height: 60%; animation-delay: .15s; }
+    .bars span:nth-child(3){ height: 54%; animation-delay: .3s; }
+    .bars span:nth-child(4){ height: 80%; animation-delay: .45s; }
+    .bars span:nth-child(5){ height: 72%; animation-delay: .6s; }
+    .bars span:nth-child(6){ height: 92%; animation-delay: .8s; }
+    @keyframes rise { 0% { transform: scaleY(0.9); opacity: 0.9; } 100% { transform: scaleY(1.08); opacity: 1; } }
+
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 46px; }
+    .comparison-panel { background: linear-gradient(135deg, #f6fbff, #edf5ff); border: 1px solid var(--line); border-radius: 26px; padding: 26px; box-shadow: var(--shadow-soft); }
+    .comparison-panel h3 { font-size: 1.7rem; color: var(--navy); margin-bottom: 18px; }
+    .compare-list { display: grid; gap: 18px; }
+    .compare-item { display: flex; gap: 14px; align-items: flex-start; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 15px 16px; }
+    .compare-item .num { min-width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: linear-gradient(135deg, var(--blue), var(--cyan)); color: #fff; font-weight: 700; font-size: 0.82rem; }
+    .compare-item strong { display: block; font-size: 1rem; color: var(--navy); margin-bottom: 6px; }
+    .compare-item p { color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
+
+    .process-flow { display: grid; grid-template-columns: repeat(5, minmax(150px, 1fr)); gap: 18px; margin-top: 40px; }
+    .flow-step { background: linear-gradient(180deg, #f9fbff, #edf5ff); border: 1px solid var(--line); border-radius: 20px; padding: 24px 18px; position: relative; overflow: hidden; }
+    .flow-step::before { content: ""; position: absolute; width: 130px; height: 130px; border-radius: 50%; background: rgba(11,117,247,.04); left: -34px; top: -34px; }
+    .flow-step .index { color: var(--blue); font-size: 11px; font-weight: 900; letter-spacing: 0.15em; margin-bottom: 14px; }
+    .flow-step h4 { color: var(--navy); font-size: 1.15rem; margin-bottom: 8px; }
+    .flow-step p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+    .coverage-grid { display: grid; grid-template-columns: repeat(4, minmax(220px, 1fr)); gap: 18px; margin-top: 42px; }
+    .coverage-card { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 22px; box-shadow: var(--shadow-soft); transition: .25s ease; }
+    .coverage-card:hover { transform: translateY(-6px); }
+    .coverage-card .tag { display: inline-block; padding: 7px 10px; font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; background: #edf5ff; color: var(--blue); border-radius: 10px; margin-bottom: 12px; }
+    .coverage-card h4 { font-size: 1.18rem; color: var(--navy); margin-bottom: 8px; }
+    .coverage-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.7; }
+
+    .module-grid { display: grid; grid-template-columns: repeat(3, minmax(220px, 1fr)); gap: 18px; margin-top: 42px; }
+    .module-card { background: linear-gradient(180deg, #ffffff, #f5f9ff); border: 1px solid var(--line); border-radius: 22px; padding: 24px; position: relative; overflow: hidden; box-shadow: var(--shadow-soft); }
+    .module-card::before { content: ""; position: absolute; width: 150px; height: 150px; border-radius: 50%; background: rgba(11,117,247,.05); left: -30px; top: -30px; }
+    .module-card .status { display: inline-block; padding: 7px 10px; font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 999px; background: #edf5ff; color: var(--blue); border: 1px solid rgba(11,117,247,.08); }
+    .module-card h3 { font-size: 1.28rem; color: var(--navy); margin: 16px 0 10px; }
+    .module-card p { color: var(--muted); font-size: 0.94rem; line-height: 1.7; }
+
+    .service-grid { display: grid; grid-template-columns: repeat(5, minmax(180px, 1fr)); gap: 18px; margin-top: 42px; }
+    .service-card { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 22px; box-shadow: var(--shadow-soft); transition: .25s ease; }
+    .service-card:hover { transform: translateY(-6px); }
+    .service-card .icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 15px; background: linear-gradient(135deg, #edf5ff, #dfeeff); color: var(--blue); font-size: 1.4rem; margin-bottom: 16px; }
+    .service-card h4 { font-size: 1.12rem; color: var(--navy); margin-bottom: 8px; }
+    .service-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+    .about-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; }
+    .about-list { display: grid; gap: 16px; margin-top: 28px; }
+    .about-item { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+    .about-item h4 { font-size: 1.08rem; color: var(--navy); margin-bottom: 6px; }
+    .about-item p { color: var(--muted); line-height: 1.7; font-size: 0.94rem; }
+    .location-box { margin-top: 18px; display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+    .location-box .pin { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, #edf5ff, #dfeeff); color: var(--blue); font-size: 1.2rem; }
+    .location-box strong { display: block; color: var(--navy); }
+    .location-box span { color: var(--muted); font-size: 0.9rem; }
+    .vision-card { background: linear-gradient(135deg, #06152f, #0a3e88); border-radius: 26px; padding: 28px; color: #fff; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .vision-card::before { content: ""; position: absolute; width: 180px; height: 180px; border-radius: 50%; border: 1px solid rgba(78,199,255,.18); top: -30px; right: -30px; }
+    .vision-card .small { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #bfe7ff; }
+    .vision-card h3 { font-size: 2rem; line-height: 1.1; margin: 14px 0 18px; }
+    .vision-card ul { list-style: none; display: grid; gap: 12px; }
+    .vision-card li { display: flex; align-items: center; gap: 10px; font-size: 1rem; color: #dfeeff; }
+    .vision-card li::before { content: "•"; color: var(--cyan); font-size: 1.6rem; line-height: 1; }
+
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 42px; }
+    .process-step { background: linear-gradient(180deg, #f9fbff, #edf5ff); border: 1px solid var(--line); border-radius: 20px; padding: 24px; }
+    .process-step .index { color: var(--blue); font-size: 11px; letter-spacing: 0.15em; font-weight: 900; }
+    .process-step h4 { margin: 12px 0 10px; font-size: 1.2rem; color: var(--navy); }
+    .process-step p { color: var(--muted); font-size: 0.92rem; line-height: 1.7; }
+
+    .tech-area { background: var(--light-bg); }
+    .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .tech-stack span { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-size: 0.8rem; font-weight: 800; color: var(--navy); box-shadow: var(--shadow-soft); }
+    .tech-panel { background: linear-gradient(145deg, #06152f, #0b376d); color: #fff; border-radius: 26px; padding: 26px; min-height: 330px; position: relative; overflow: hidden; }
+    .tech-panel::before { content: ""; position: absolute; width: 220px; height: 220px; border-radius: 50%; border: 1px solid rgba(78,199,255,.18); right: -60px; top: -50px; }
+    .tech-panel .tiny { font-size: 12px; color: #bfe6ff; letter-spacing: 0.15em; text-transform: uppercase; }
+    .tech-panel h3 { font-size: 2rem; margin: 12px 0 18px; }
+    .code-box { margin-top: 18px; border: 1px solid rgba(255,255,255,.08); border-radius: 18px; background: rgba(255,255,255,.04); padding: 18px; font-family: Consolas, monospace; line-height: 2; color: #d0ebff; }
+
+    .career-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 42px; }
+    .career-card { background: linear-gradient(180deg, #fbfdff, #f3f8ff); border: 1px solid var(--line); border-radius: 22px; padding: 26px; }
+    .career-card h3 { font-size: 1.4rem; color: var(--navy); margin-bottom: 18px; }
+    .career-item { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(11,117,247,.08); }
+    .career-item:last-child { border-bottom: none; }
+    .career-item strong { display: block; color: var(--navy); margin-bottom: 4px; }
+    .career-item span { color: var(--muted); font-size: 0.9rem; }
+    .tag-pill { padding: 6px 10px; border-radius: 999px; background: #edf5ff; color: var(--blue); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800; }
+
+    .faq-contact { background: var(--light-bg); }
+    .faq-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+    .faq-list { display: grid; gap: 14px; }
+    .faq-item { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; }
+    .faq-item h4 { font-size: 1rem; color: var(--navy); margin-bottom: 8px; }
+    .faq-item p { color: var(--muted); line-height: 1.7; font-size: 0.92rem; }
+    .contact-box { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 26px; box-shadow: var(--shadow-soft); }
+    .contact-box h3 { font-size: 1.6rem; color: var(--navy); margin-bottom: 18px; }
+    .contact-list { display: grid; gap: 12px; }
+    .contact-item { background: #f6faff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; color: var(--muted); }
+    .contact-item strong { color: var(--navy); display: block; margin-bottom: 4px; }
+    .contact-form { display: grid; gap: 12px; margin-top: 18px; }
+    .contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fbfdff; font-size: 14px; outline: none; }
+    .contact-form textarea { min-height: 110px; resize: vertical; }
+    .contact-form button { border: none; cursor: pointer; padding: 14px 18px; border-radius: 12px; background: linear-gradient(135deg, var(--blue), var(--cyan)); color: #fff; font-weight: 800; }
+
+    .site-footer { background: #07172d; color: #d1e4ff; padding: 60px 0 18px; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 26px; }
+    .footer-brand h3 { color: #fff; font-size: 1.7rem; margin-bottom: 12px; }
+    .footer-brand p, .footer-links a { color: #bfcee8; line-height: 1.8; font-size: 0.95rem; }
+    .footer-links h4 { color: #fff; margin-bottom: 12px; }
+    .footer-links a { display: block; }
+    .footer-links a:hover { color: var(--cyan); }
+    .copy { margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.08); text-align: center; font-size: 0.82rem; color: #abc3e4; }
+
+    @media (max-width: 1060px) {
+      .hero-grid, .about-grid, .tech-grid, .faq-wrap { grid-template-columns: 1fr; }
+      .coverage-grid { grid-template-columns: repeat(2, 1fr); }
+      .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .module-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-flow { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 760px) {
+      .nav-links {
+        display: none; position: absolute; top: 78px; left: 0; right: 0;
+        background: rgba(6,21,47,0.96); border-bottom: 1px solid rgba(255,255,255,.08);
+        padding: 18px 20px; flex-direction: column; align-items: flex-start; box-shadow: 0 18px 36px rgba(0,0,0,.12);
+      }
+      .nav-links.open { display: flex; }
+      .menu-btn { display: block; }
+      .coverage-grid, .service-grid, .module-grid, .process-grid, .process-flow, .footer-grid { grid-template-columns: 1fr; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .stats { gap: 18px; }
+      .hero { min-height: 680px; }
+      .hero-grid { min-height: 680px; padding-top: 80px; }
+      .section { padding: 78px 0; }
+      .primary-btn, .secondary-btn, .ghost-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#home" class="brand" aria-label="DESAT INFOTECH home">
+        <span class="brand-mark"></span>
+        <span>DESAT<small>INFO TECH</small></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#erp">ERP</a>
+        <a href="#products">Products</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#careers">Careers</a>
+        <a href="#contact">Contact</a>
+        <a href="admin-login.html" class="nav-btn">Admin Login</a>
+      </nav>
+
+      <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow"><span class="dot"></span> ERP • Production • AI • Automation</div>
+          <h1>We build <span class="gradient">product-driven</span> software for modern businesses.</h1>
+          <p class="hero-copy">From raw material to dispatch, we create connected ERP systems, production workflows, custom software, web apps, mobile apps and AI solutions designed around how businesses actually operate.</p>
+
+          <div class="hero-actions">
+            <a href="#contact" class="primary-btn">Talk to us</a>
+            <a href="#erp" class="secondary-btn">Explore product</a>
+            <a href="admin-login.html" class="ghost-btn">Admin Login</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><strong>7+</strong><span>solution areas</span></div>
+            <div class="stat"><strong>Salem</strong><span>head office</span></div>
+            <div class="stat"><strong>Custom</strong><span>product-first</span></div>
+          </div>
+        </div>
+
+        <div class="hero-card-wrap reveal">
+          <div class="hero-card">
+            <div class="top-badge">Live business dashboard</div>
+            <h3>ERP & production</h3>
+            <div class="metric-grid">
+              <div class="metric"><small>Units produced</small><strong>3,420</strong></div>
+              <div class="metric"><small>On-time delivery</small><strong>94%</strong></div>
+              <div class="metric"><small>Stock alerts</small><strong>3</strong></div>
+              <div class="metric"><small>Reorder soon</small><strong>12</strong></div>
+            </div>
+            <div class="bars">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="erp">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-tag">ERP & Production</div>
+          <h2 class="section-title">One system from raw material to dispatch.</h2>
+          <p class="section-copy">We build ERP and production software that understands how your business actually works — from sales and purchasing to inventory, quality, planning, dispatch and insightful reporting.</p>
+        </div>
+
+        <div class="compare-grid reveal">
+          <div class="comparison-panel">
+            <h3>Before</h3>
+            <div class="compare-list">
+              <div class="compare-item">
+                <div class="num">1</div>
+                <div>
+                  <strong>Scattered records</strong>
+                  <p>Stock in one sheet, orders on WhatsApp, production on paper and no one sees the complete picture.</p>
+                </div>
+              </div>
+              <div class="compare-item">
+                <div class="num">2</div>
+                <div>
+                  <strong>Shortages found too late</strong>
+                  <p>Material runs out mid-job and delivery dates slip because the team is working reactive instead of planned.</p>
+                </div>
+              </div>
+              <div class="compare-item">
+                <div class="num">3</div>
+                <div>
+                  <strong>Reports built by hand</strong>
+                  <p>Month-end reporting takes days and numbers arrive late when decisions are already made.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comparison-panel">
+            <h3>After</h3>
+            <div class="compare-list">
+              <div class="compare-item">
+                <div class="num">✓</div>
+                <div>
+                  <strong>One source of truth</strong>
+                  <p>Sales, purchase, stock, production, quality and accounts share the same live data.</p>
+                </div>
+              </div>
+              <div class="compare-item">
+                <div class="num">✓</div>
+                <div>
+                  <strong>Planned production</strong>
+                  <p>BOMs and work orders check stock first and trigger purchase requests before operations stop.</p>
+                </div>
+              </div>
+              <div class="compare-item">
+                <div class="num">✓</div>
+                <div>
+                  <strong>Reports as it happens</strong>
+                  <p>Output, rejections, pending orders and GST-ready activity are instant and accurate.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="process-flow reveal">
+          <div class="flow-step"><div class="index">01</div><h4>Plan</h4><p>Orders, BOMs and material requirements are aligned before production starts.</p></div>
+          <div class="flow-step"><div class="index">02</div><h4>Procure</h4><p>Purchase orders, supplier details and goods received keep the flow moving.</p></div>
+          <div class="flow-step"><div class="index">03</div><h4>Produce</h4><p>Work orders, shift output, downtime and machine tracking are recorded live.</p></div>
+          <div class="flow-step"><div class="index">04</div><h4>Inspect</h4><p>Quality checks, rejection reasons and rework are tracked and reported clearly.</p></div>
+          <div class="flow-step"><div class="index">05</div><h4>Dispatch</h4><p>Delivery, invoice and GST-ready records are tied to one connected workflow.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-tag">Products completed</div>
+          <h2 class="section-title">What we’ve built for businesses.</h2>
+          <p class="section-copy">These are the products and systems we’ve designed for manufacturing, inventory, quality, automation and digital work management.</p>
+        </div>
+
+        <div class="module-grid reveal">
+          <div class="module-card"><span class="status">ERP</span><h3>Manufacturing ERP</h3><p>Production planning, stock control, purchase tracking, dispatch and business reporting in one platform.</p></div>
+          <div class="module-card"><span class="status">Inventory</span><h3>Warehouse System</h3><p>Real-time stock movement, reorder alerts, warehouse tracking and item-wise traceability.</p></div>
+          <div class="module-card"><span class="status">Mobile</span><h3>Shop Floor App</h3><p>Machine entry, output tracking, downtime logs and quality inputs from handheld devices.</p></div>
+          <div class="module-card"><span class="status">AI</span><h3>Automation Tools</h3><p>Forecasting, document processing, dashboards and workflow automation for business operations.</p></div>
+          <div class="module-card"><span class="status">Web</span><h3>Business Portal</h3><p>Custom internal portals for approvals, reporting, sales updates, and user-friendly dashboards.</p></div>
+          <div class="module-card"><span class="status">Custom</span><h3>Workflow Software</h3><p>Client-specific applications designed around real operational reality rather than generic templates.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background: var(--light-bg);">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-tag">What the ERP covers</div>
+          <h2 class="section-title">Business modules built for growing operations.</h2>
+        </div>
+
+        <div class="coverage-grid reveal">
+          <div class="coverage-card"><div class="tag">Sales</div><h4>Sales & customers</h4><p>Quotations, orders, customer history and outstanding payments with simpler follow-up management.</p></div>
+          <div class="coverage-card"><div class="tag">Purchase</div><h4>Purchase management</h4><p>Requisitions, purchase orders, supplier rates and delivery tracking all in one flow.</p></div>
+          <div class="coverage-card"><div class="tag">Stock</div><h4>Inventory control</h4><p>Multiple stores, batch tracking, stock movement and reorder alerts to reduce shortages.</p></div>
+          <div class="coverage-card"><div class="tag">Production</div><h4>Production planning</h4><p>BOMs, work orders, routing and material requirement planning linked to live status.</p></div>
+          <div class="coverage-card"><div class="tag">Shop floor</div><h4>Shop-floor tracking</h4><p>Shift-wise output, downtime, machine status and wastage monitored in real time.</p></div>
+          <div class="coverage-card"><div class="tag">Quality</div><h4>Quality control</h4><p>Inspection checklists, rejection reasons and rework tracking to improve output quality.</p></div>
+          <div class="coverage-card"><div class="tag">Finance</div><h4>Accounts & GST</h4><p>Invoices, ledgers, payments and GST-ready data tied to business operations and status.</p></div>
+          <div class="coverage-card"><div class="tag">HR</div><h4>HR & payroll</h4><p>Attendance, shifts and payroll support for production and office teams.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-tag">What we do</div>
+          <h2 class="section-title">Five ways we help your business grow.</h2>
+        </div>
+
+        <div class="service-grid reveal">
+          <div class="service-card"><div class="icon">📊</div><h4>ERP & production</h4><p>One connected system for sales, purchase, inventory, planning, quality and accounts.</p></div>
+          <div class="service-card"><div class="icon">💻</div><h4>Custom software</h4><p>Purpose-built software that fits your workflow instead of forcing a generic system.</p></div>
+          <div class="service-card"><div class="icon">⚡</div><h4>Automation</h4><p>Eliminate repetitive tasks and reduce manual effort across departments.</p></div>
+          <div class="service-card"><div class="icon">🌐</div><h4>Web & mobile apps</h4><p>Responsive business tools for teams, customers and field operations.</p></div>
+          <div class="service-card"><div class="icon">🤖</div><h4>AI & ML solutions</h4><p>Real-world intelligence for forecasting, monitoring and smarter operations.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="reveal">
+          <div class="section-tag">About us</div>
+          <h2 class="section-title">Your business deserves technology built around your needs.</h2>
+          <p class="section-copy">We are a product-minded IT company in Salem, Tamil Nadu. We listen first, then build custom business software that fits the way your company already works.</p>
+
+          <div class="about-list">
+            <div class="about-item"><h4>Listen first</h4><p>We understand your process before writing any code or designing screenshots.</p></div>
+            <div class="about-item"><h4>Build to last</h4><p>Secure, scalable and well-tested systems designed for long-term reliability.</p></div>
+            <div class="about-item"><h4>Keep it simple</h4><p>If the team needs a manual to use the system, we haven’t finished the job.</p></div>
+          </div>
+
+          <div class="location-box">
+            <div class="pin">📍</div>
+            <div>
+              <strong>Company Location</strong>
+              <span>Salem, Tamil Nadu, India</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="vision-card">
+            <div class="small">Our vision</div>
+            <h3>To help growing businesses run on software that truly fits them.</h3>
+            <ul>
+              <li>Innovate with real business understanding</li>
+              <li>Develop clear and reliable systems</li>
+              <li>Deliver support that keeps things working</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="rnd">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-tag">R&D modules</div>
+          <h2 class="section-title">Modules we are building for tomorrow’s factory floor.</h2>
+          <p class="section-copy">Our research team tests product ideas against real business problems before moving them toward client delivery.</p>
+        </div>
+
+        <div class="module-grid reveal">
+          <div class="module-card"><span class="status">Prototype</span><h3>Demand forecasting</h3><p>Predicts next-month sales and material needs from seasonal changes and prior order patterns.</p></div>
+          <div class="module-card"><span class="status">Research</span><h3>Visual quality inspection</h3><p>Uses camera feeds to detect defects, count rejections and reduce manual inspection effort.</p></div>
+          <div class="module-card"><span class="status">Research</span><h3>Machine monitoring</h3><p>Tracks machine health, downtime and production flow to avoid unexpected breakdowns.</p></div>
+          <div class="module-card"><span class="status">Prototype</span><h3>Document reading</h3><p>Reads invoices and challans and auto-fills business records to save time on repetitive work.</p></div>
+          <div class="module-card"><span class="status">Prototype</span><h3>ERP assistant</h3><p>Ask business questions in plain language and get answers from your ERP data.</p></div>
+          <div class="module-card"><span class="status">Testing</span><h3>Shop-floor app</h3><p>Lets operators record output, downtime and rejections directly from the production floor.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background: #fff;">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-tag">How we work</div>
+          <h2 class="section-title">From your idea to a working solution.</h2>
+        </div>
+
+        <div class="process-grid reveal">
+          <div class="process-step"><div class="index">01 / UNDERSTAND</div><h4>Discover</h4><p>We learn how your business runs today and where time or money is getting lost.</p></div>
+          <div class="process-step"><div class="index">02 / DESIGN</div><h4>Plan</h4><p>You get a clear scope, timeline and screens before development begins.</p></div>
+          <div class="process-step"><div class="index">03 / BUILD</div><h4>Develop</h4><p>We build in stages and show progress so there are no surprises or delays.</p></div>
+          <div class="process-step"><div class="index">04 / LAUNCH</div><h4>Support</h4><p>We go live, train your team and keep helping with improvements after release.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tech-area section">
+      <div class="container tech-grid">
+        <div class="reveal">
+          <div class="section-tag">Technology</div>
+          <h2 class="section-title">Modern tools chosen for your project.</h2>
+          <p class="section-copy">We build using practical, scalable and maintainable technology that supports real-world business use.</p>
+          <div class="tech-stack">
+            <span>React</span><span>Next.js</span><span>Node.js</span><span>Python</span><span>PHP</span><span>Java</span><span>Flutter</span><span>SQL</span><span>Cloud</span><span>AI/ML</span><span>Figma</span><span>Git</span>
+          </div>
+        </div>
+
+        <div class="tech-panel reveal">
+          <div class="tiny">Digital engineering</div>
+          <h3>Idea → Design → Build → Scale</h3>
+          <div class="code-box">
+            &lt;solution&gt;<br>
+            &nbsp;&nbsp;innovate();<br>
+            &nbsp;&nbsp;develop();<br>
+            &nbsp;&nbsp;deliver();<br>
+            &nbsp;&nbsp;grow();<br>
+            &lt;/solution&gt;
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="careers">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-tag">Careers</div>
+          <h2 class="section-title">Build ERP and AI products with us in Salem.</h2>
+        </div>
+
+        <div class="career-grid reveal">
+          <div class="career-card">
+            <h3>Why join us</h3>
+            <div class="career-item">
+              <div><strong>Real projects from day one</strong><span>Work on software businesses actually use.</span></div>
+              <span class="tag-pill">Core</span>
+            </div>
+            <div class="career-item">
+              <div><strong>Small team, real ownership</strong><span>Ideas are heard and work is visible.</span></div>
+              <span class="tag-pill">Team</span>
+            </div>
+            <div class="career-item">
+              <div><strong>Room to learn</strong><span>R&D work gives space to explore AI and new tools.</span></div>
+              <span class="tag-pill">R&D</span>
+            </div>
+          </div>
+
+          <div class="career-card">
+            <h3>Open positions</h3>
+            <div class="career-item"><div><strong>ERP Implementation Engineer</strong><span>Full-time • Salem</span></div><span class="tag-pill">1-3 yrs</span></div>
+            <div class="career-item"><div><strong>Full-stack Developer</strong><span>Full-time • Salem</span></div><span class="tag-pill">1-3 yrs</span></div>
+            <div class="career-item"><div><strong>AI / ML Engineer</strong><span>Full-time • Salem</span></div><span class="tag-pill">0-2 yrs</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-contact section" id="contact">
+      <div class="container faq-wrap">
+        <div class="reveal">
+          <div class="section-tag">FAQ</div>
+          <h2 class="section-title">Before you get in touch.</h2>
+          <div class="faq-list">
+            <div class="faq-item"><h4>Can the ERP be customized for our production process?</h4><p>Yes. We design around your workflow instead of forcing a one-size-fits-all package.</p></div>
+            <div class="faq-item"><h4>Can we bring our existing data from Excel?</h4><p>Yes. We can clean, structure and migrate your historical records into the new system.</p></div>
+            <div class="faq-item"><h4>Do you support us after launch?</h4><p>Yes. We provide support, updates and iterative improvements after deployment.</p></div>
+            <div class="faq-item"><h4>How do we start?</h4><p>Tell us about your process, challenges and goals. We’ll help define the starting roadmap.</p></div>
+          </div>
+        </div>
+
+        <div class="contact-box reveal">
+          <h3>Let’s build your next digital solution.</h3>
+          <div class="contact-list">
+            <div class="contact-item"><strong>Email</strong> info@desatinfotech.com</div>
+            <div class="contact-item"><strong>Location</strong> Salem, Tamil Nadu, India</div>
+          </div>
+
+          <form class="contact-form">
+            <input type="text" placeholder="Your name" required />
+            <input type="tel" placeholder="Phone number" required />
+            <select>
+              <option>I'm interested in</option>
+              <option>ERP & Production</option>
+              <option>Custom Software</option>
+              <option>Automation</option>
+              <option>Web / Mobile App</option>
+              <option>AI / ML</option>
+            </select>
+            <textarea rows="4" placeholder="Tell us about your business"></textarea>
+            <button type="submit">Send message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3>DESAT INFOTECH</h3>
+        <p>ERP, production software, automation, web, mobile and AI for growing businesses.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Products</h4>
+        <a href="#products">Products completed</a>
+        <a href="#erp">ERP & production</a>
+        <a href="#rnd">R&D modules</a>
+      </div>
+
+      <div class="footer-links">
+        <h4>Company</h4>
+        <a href="#about">Vision & mission</a>
+        <a href="#careers">Careers</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="footer-links">
+        <h4>Connect</h4>
+        <a href="mailto:info@desatinfotech.com">info@desatinfotech.com</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Salem+Tamil+Nadu+India" target="_blank" rel="noreferrer">Salem, Tamil Nadu</a>
+        <a href="admin-login.html">Admin login</a>
+      </div>
+    </div>
+
+    <div class="container copy">© 2026 Desat Info Tech. All rights reserved.</div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
+      });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
